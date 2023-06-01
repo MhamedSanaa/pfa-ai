@@ -36,8 +36,6 @@ async def process_image(image: UploadFile):
     # Open the image using Pillow
     pillow_image = Image.open(image_io).convert("RGB")
     pixel_values = processor(images=pillow_image, return_tensors="pt").pixel_values
-    
-    pillow_image.show()
 
     generated_ids = model.generate(pixel_values)
     generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
